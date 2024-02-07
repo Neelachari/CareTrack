@@ -100,7 +100,7 @@ export const Patients = () => {
      <div id="div2">
      {
         products.length>0 && products.map((e)=>{
-          return <PatientCard key={e.id} {...e}/>
+          return <PatientCard key={e._id} {...e}/>
         }  )
       }
      </div>

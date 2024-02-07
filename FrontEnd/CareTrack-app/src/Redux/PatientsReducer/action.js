@@ -4,7 +4,7 @@ import { DELETE_PRODUCT_SUCCESS, GET_PRODUCT_SUCCESS, PATCH_PRODUCT_SUCCESS, POS
 export const postProduct=(newProduct)=>(dispatch)=>{
     dispatch({type:PRODUCT_REQUEST})
 
-     axios.post(`http://localhost:9191/Patients/Patients`, newProduct)
+     axios.post(`https://caretrack-backend-cz6a.onrender.com/Patients/Patients`, newProduct)
     .then((res)=>{
         dispatch({type:POST_PRODUCT_SUCCESS, payload:res.data})
     })
@@ -18,7 +18,7 @@ export const postProduct=(newProduct)=>(dispatch)=>{
 
 export const getProducts = (obj)=>(dispatch)=>{
     dispatch({type:PRODUCT_REQUEST})
-    axios.get(`http://localhost:9191/Patients/Patients`,obj)
+    axios.get(`https://caretrack-backend-cz6a.onrender.com/Patients/Patients`,obj)
     .then((res)=>{
         dispatch({type:GET_PRODUCT_SUCCESS, payload :res.data})
     })
@@ -32,7 +32,7 @@ export const getProducts = (obj)=>(dispatch)=>{
 export const editProduct =({_id, data})=> (dispatch)=>{
     console.log(data )
     dispatch({type:PRODUCT_REQUEST})
-    axios.patch(`http://localhost:9191/Patients/Patients/${_id}`, data)
+    axios.patch(`https://caretrack-backend-cz6a.onrender.com/Patients/Patients/${_id}`, data)
     .then((res)=>{
         console.log(res)
        dispatch({type:PATCH_PRODUCT_SUCCESS})
@@ -54,7 +54,7 @@ export const deleteproduct =(id) => (dispatch)=>{
 
     let payload =[]
 
-   axios.get(`http://localhost:9191/Patients/Patients/`)
+   axios.get(`https://caretrack-backend-cz6a.onrender.com/Patients/Patients/`)
     .then((res)=>{
         payload= res.data.filter((el)=> el.id !== id)
     })
@@ -62,7 +62,7 @@ export const deleteproduct =(id) => (dispatch)=>{
 
 
 
-   return axios.delete(`http://localhost:9191/Patients/Patients/${id}`)
+   return axios.delete(`https://caretrack-backend-cz6a.onrender.com/Patients/Patients/${id}`)
     .then((res)=>{
        console.log(res);
        dispatch({type:DELETE_PRODUCT_SUCCESS, payload})

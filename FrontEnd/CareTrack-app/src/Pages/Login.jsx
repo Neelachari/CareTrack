@@ -20,8 +20,8 @@ import { login } from '../Redux/Auth/action'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 export const Login = () => {
-  const [Email,setEmail]=useState("")
-    const [Password,setPassword]=useState("")
+  const [Email,setEmail]=useState("user@123")
+    const [Password,setPassword]=useState("user@123")
     const dispatch=useDispatch()
     const auth=useSelector((store)=> store.authReducer.isAuth)
     console.log(auth)

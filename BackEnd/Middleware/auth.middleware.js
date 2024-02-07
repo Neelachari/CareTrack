@@ -1,16 +1,22 @@
-const JWT=require("jsonwebtoken")
+const JWT = require('jsonwebtoken');
+require('dotenv').config();
 
-require("dotenv").config()
+const auth = async (req, res, next) => {
+  const authorizationHeader = req.headers.authorization;
 
-const auth= async(req,res, next)=>{
-    const token =req.headers.authorization.split(" ")[1]
-    try {
-       const decode=JWT.verify(token, process.env.KEY)
-       req.body.userID=decode.userID
-       next()
-    } catch (error) {
-        res.status(400).send({error:error.message})
-    }
-}
+  if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
+    return res.status(401).send({ error: 'Invalid Authorization header format' });
+  }
 
-module.exports={auth}
+  const token = authorizationHeader.split(' ')[1];
+
+  try {
+    const decode = JWT.verify(token, process.env.KEY);
+    req.body._id = decode._id;
+    next();
+  } catch (error) {
+    res.status(401).send({ error: 'Invalid or expired token' });
+  }
+};
+
+module.exports = { auth };

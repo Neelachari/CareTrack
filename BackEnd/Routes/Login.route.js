@@ -17,7 +17,7 @@ LoginRouter.post("/login", async(req,res)=>{
     const User=await RegisterModel.findOne({Email})
     let verify=await bcrypt.compare(Password,User.Password)
     if(verify){
-        const token= await JWT.sign({userId:User._id},process.env.key)
+        const token= await JWT.sign({userId:User._id},process.env.KEY)
         res.status(200).send({message:"Login Successful...",username:User.username,token})
     }
    } catch (error) {

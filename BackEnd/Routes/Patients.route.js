@@ -1,7 +1,7 @@
 const express = require('express')
 const PatientsRoute = express.Router()
 const PatientsModal = require('../Model/Patients.model')
-const {auth}=require("../Middleware/auth.middleware")
+// const {auth}=require("../Middleware/auth.middleware")
 
 PatientsRoute.get('/Patients', async (req, res) => {
     try {
@@ -40,14 +40,16 @@ PatientsRoute.post('/Patients', async (req, res) => {
 })
 
 
-PatientsRoute.patch('/Patients/:_id',auth, async (req, res) => {
+PatientsRoute.patch('/Patients/:id', async (req, res) => {
+    // console.log(req.body, req.params)
+    // let IdFound= await PatientsModal.findOne({_id : req.params.id})
     let UpdatePost = await PatientsModal.updateOne({ _id: req.params.id }, req.body)
-
+    // console.log(IdFound)
     res.send({ message: "The Patient has been updated Successfully", UpdatePost })
 })
 
 
-PatientsRoute.delete('/Patients/:id',auth, async (req, res) => {
+PatientsRoute.delete('/Patients/:id', async (req, res) => {
     let deletePost = await PatientsModal.deleteOne({ _id: req.params.id })
     
     res.send({ message: "The Patient has been deleted Successfully", deletePost })

@@ -54,6 +54,7 @@ import { editProduct } from '../Redux/PatientsReducer/action'
 import axios from 'axios' // Ensure axios is imported
 
 export const EditPatient = () => {
+  
   const [age, setAge] = useState("");
   const [name, setName] = useState('');
   const [contact, setContact] = useState('');
@@ -74,15 +75,16 @@ export const EditPatient = () => {
   }, [_id, products]);
 
   const handleEdit = () => {
-    const data = { name, age, Contact: contact, gender, Hisotry: history };
-    dispatch(editProduct(_id, data));
-    console.log(data);
+    const data = { name:name, age:age, Contact:contact, gender, Hisotry: history };
+    dispatch(editProduct({_id, data}));
+   
   };
 
   return (
     <div style={{ marginTop: "50px", border: "1px solid gray" }}>
       <div style={{ marginTop: "50px", display: "flex", flexDirection: "column", width: "250px" }}>
         <p>{_id}</p>
+        {/* <input type="text"  value={image} placeholder="Edit Name" onChange={(e) => setImage(e.target.value)} /> */}
         <input type="text" value={name} placeholder="Edit Name" onChange={(e) => setName(e.target.value)} />
         <input type="number" value={age} placeholder="Edit Age" onChange={(e) => setAge(e.target.value)} />
         <input type="number" value={contact} placeholder="Edit Contact" onChange={(e) => setContact(e.target.value)} />
@@ -93,3 +95,10 @@ export const EditPatient = () => {
     </div>
   );
 };
+
+// image:String,
+//     name :String,
+//     age:Number,
+//     Contact:Number,
+//     gender:String,
+//     Hisotry:String
